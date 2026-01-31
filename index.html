@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SSM Health Dashboard</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <script src="config.js"></script>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="logo-section">
+                <div class="logo-icon">
+                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 2L2 7L12 12L22 7L12 2Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M2 17L12 22L22 17" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M2 12L12 17L22 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </div>
+                <div class="logo-text">
+                    <h1>SSM Dashboard</h1>
+                    <p class="subtitle">System Health Monitor</p>
+                </div>
+            </div>
+            <div class="header-actions">
+                <button class="refresh-btn" id="refreshBtn">
+                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M21.5 2V8M21.5 8H15.5M21.5 8L18.5 5C17.3 3.8 15.8 3 14 2.5C10.5 1.5 6.5 3 4.5 6C2.5 9 2.5 13 4.5 16C6.5 19 10.5 20.5 14 19.5C16.5 18.8 18.5 17 19.5 14.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    Refresh
+                </button>
+                <div class="last-updated" id="lastUpdated">
+                    <span class="pulse-dot"></span>
+                    <span>Live</span>
+                </div>
+            </div>
+        </header>
+
+        <!-- Overall Status Banner -->
+        <div class="status-banner" id="statusBanner">
+            <div class="status-icon" id="statusIcon">
+                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M22 11.08V12C22 17.52 17.52 22 12 22C6.48 22 2 17.52 2 12C2 6.48 6.48 2 12 2C14.76 2 17.24 3.04 19.07 4.76" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M22 4L12 14.01L9 11.01" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </div>
+            <div class="status-content">
+                <h2 id="statusTitle">Checking System Status...</h2>
+                <p id="statusMessage">Fetching health data from all endpoints</p>
+            </div>
+            <div class="status-progress">
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressFill"></div>
+                </div>
+                <span class="progress-text" id="progressText">0/3</span>
+            </div>
+        </div>
+
+        <!-- Service Cards -->
+        <div class="services-grid">
+            <!-- Core Service -->
+            <div class="service-card" id="coreCard">
+                <div class="card-header">
+                    <div class="service-info">
+                        <div class="service-icon core">
+                            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2"/>
+                                <circle cx="12" cy="12" r="3" fill="currentColor"/>
+                                <path d="M12 2V6M12 18V22M22 12H18M6 12H2" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                            </svg>
+                        </div>
+                        <div>
+                            <h3>Core Service</h3>
+                            <p class="service-url">ssm-core-prod</p>
+                        </div>
+                    </div>
+                    <div class="status-badge loading" id="coreBadge">
+                        <span class="spinner"></span>
+                        <span>Checking</span>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="response-data" id="coreResponse">
+                        <div class="skeleton-loader"></div>
+                    </div>
+                    <div class="card-footer">
+                        <span class="response-time" id="coreTime">-- ms</span>
+                        <a href="https://ssm-core-prod.06f18550.public.multi-containers.ibm.com/check/sanity" target="_blank" class="link-btn">
+                            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M18 13V19C18 19.5304 17.7893 20.0391 17.4142 20.4142C17.0391 20.7893 16.5304 21 16 21H5C4.46957 21 3.96086 20.7893 3.58579 20.4142C3.21071 20.0391 3 19.5304 3 19V8C3 7.46957 3.21071 6.96086 3.58579 6.58579C3.96086 6.21071 4.46957 6 5 6H11" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M15 3H21V9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M10 14L21 3" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                            Open
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Trial Service -->
+            <div class="service-card" id="trialCard">
+                <div class="card-header">
+                    <div class="service-info">
+                        <div class="service-icon trial">
+                            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M9 11L12 14L22 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M21 12V19C21 19.5304 20.7893 20.0391 20.4142 20.4142C20.0391 20.7893 19.5304 21 19 21H5C4.46957 21 3.96086 20.7893 3.58579 20.4142C3.21071 20.0391 3 19.5304 3 19V5C3 4.46957 3.21071 3.96086 3.58579 3.58579C3.96086 3.21071 4.46957 3 5 3H16" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </div>
+                        <div>
+                            <h3>Trial Service</h3>
+                            <p class="service-url">ssm-trial-prod</p>
+                        </div>
+                    </div>
+                    <div class="status-badge loading" id="trialBadge">
+                        <span class="spinner"></span>
+                        <span>Checking</span>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="response-data" id="trialResponse">
+                        <div class="skeleton-loader"></div>
+                    </div>
+                    <div class="card-footer">
+                        <span class="response-time" id="trialTime">-- ms</span>
+                        <a href="https://ssm-trial-prod.feab05c7.public.multi-containers.ibm.com/ssm-trial-prod/check/sanity" target="_blank" class="link-btn">
+                            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M18 13V19C18 19.5304 17.7893 20.0391 17.4142 20.4142C17.0391 20.7893 16.5304 21 16 21H5C4.46957 21 3.96086 20.7893 3.58579 20.4142C3.21071 20.0391 3 19.5304 3 19V8C3 7.46957 3.21071 6.96086 3.58579 6.58579C3.96086 6.21071 4.46957 6 5 6H11" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M15 3H21V9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M10 14L21 3" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                            Open
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- API Endpoint Service -->
+            <div class="service-card" id="apiCard">
+                <div class="card-header">
+                    <div class="service-info">
+                        <div class="service-icon api">
+                            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M13 2L3 14H12L11 22L21 10H12L13 2Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </div>
+                        <div>
+                            <h3>API Endpoint</h3>
+                            <p class="service-url">ssm-apiendpoint-prod</p>
+                        </div>
+                    </div>
+                    <div class="status-badge loading" id="apiBadge">
+                        <span class="spinner"></span>
+                        <span>Checking</span>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="response-data" id="apiResponse">
+                        <div class="skeleton-loader"></div>
+                    </div>
+                    <div class="card-footer">
+                        <span class="response-time" id="apiTime">-- ms</span>
+                        <a href="https://ssm-apiendpoint-prod.06f18550.public.multi-containers.ibm.com/apiendpoint//sanity" target="_blank" class="link-btn">
+                            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M18 13V19C18 19.5304 17.7893 20.0391 17.4142 20.4142C17.0391 20.7893 16.5304 21 16 21H5C4.46957 21 3.96086 20.7893 3.58579 20.4142C3.21071 20.0391 3 19.5304 3 19V8C3 7.46957 3.21071 6.96086 3.58579 6.58579C3.96086 6.21071 4.46957 6 5 6H11" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M15 3H21V9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M10 14L21 3" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                            Open
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p>Built with 💙 for SSM Monitoring</p>
+            <p class="footer-note">Auto-refreshes every 30 seconds</p>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

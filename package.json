@@ -1,0 +1,23 @@
+{
+  "name": "ssm-dashboard",
+  "version": "2.0.0",
+  "description": "Real-time SSM Health Monitoring Dashboard with CORS Proxy",
+  "main": "proxy-server.js",
+  "scripts": {
+    "start": "node proxy-server.js",
+    "dev": "node proxy-server.js",
+    "test": "echo \"No tests specified\" && exit 0"
+  },
+  "keywords": [
+    "ssm",
+    "dashboard",
+    "monitoring",
+    "health-check",
+    "cors-proxy"
+  ],
+  "author": "IBM SSM Team",
+  "license": "MIT",
+  "engines": {
+    "node": ">=12.0.0"
+  }
+}
