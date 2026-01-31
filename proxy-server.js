@@ -32,7 +32,10 @@ const MIME_TYPES = {
 const SSM_ENDPOINTS = {
     '/api/core': 'https://ssm-core-prod.06f18550.public.multi-containers.ibm.com/check/sanity',
     '/api/trial': 'https://ssm-trial-prod.feab05c7.public.multi-containers.ibm.com/ssm-trial-prod/check/sanity',
-    '/api/apiendpoint': 'https://ssm-apiendpoint-prod.06f18550.public.multi-containers.ibm.com/apiendpoint//sanity'
+    '/api/apiendpoint': 'https://ssm-apiendpoint-prod.06f18550.public.multi-containers.ibm.com/apiendpoint//sanity',
+    '/api/coreApps': 'https://ssm-core-apps-prod.06f18550.public.multi-containers.ibm.com//sca/api/check/sanity',
+    '/api/wdpAdmin': 'https://ssm-wdp-admin-prod.06f18550.public.multi-containers.ibm.com//wdp-admin/api/check/sanity',
+    '/api/scwConsumer': 'https://ssm-scw-consumer.06f18550.public.multi-containers.ibm.com/sanity'
 };
 
 // Proxy request handler

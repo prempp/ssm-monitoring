@@ -4,11 +4,17 @@ const USE_PROXY = window.location.hostname === 'localhost' || window.location.ho
 const endpoints = USE_PROXY ? {
     core: '/api/core',
     trial: '/api/trial',
-    api: '/api/apiendpoint'
+    api: '/api/apiendpoint',
+    coreApps: '/api/coreApps',
+    wdpAdmin: '/api/wdpAdmin',
+    scwConsumer: '/api/scwConsumer'
 } : {
     core: CONFIG.endpoints.core.url,
     trial: CONFIG.endpoints.trial.url,
-    api: CONFIG.endpoints.api.url
+    api: CONFIG.endpoints.api.url,
+    coreApps: CONFIG.endpoints.coreApps.url,
+    wdpAdmin: CONFIG.endpoints.wdpAdmin.url,
+    scwConsumer: CONFIG.endpoints.scwConsumer.url
 };
 
 // State
@@ -40,7 +46,10 @@ async function checkAllServices() {
     const results = await Promise.all([
         checkService('core', endpoints.core),
         checkService('trial', endpoints.trial),
-        checkService('api', endpoints.api)
+        checkService('api', endpoints.api),
+        checkService('coreApps', endpoints.coreApps),
+        checkService('wdpAdmin', endpoints.wdpAdmin),
+        checkService('scwConsumer', endpoints.scwConsumer)
     ]);
     
     updateOverallStatus(results);
@@ -150,7 +159,7 @@ function updateOverallStatus(results) {
     const progressText = document.getElementById('progressText');
     
     const healthyCount = results.filter(r => r.healthy).length;
-    const totalCount = results.length;
+    const totalCount = 6; // Total number of services
     const percentage = (healthyCount / totalCount) * 100;
     
     // Update progress
@@ -160,7 +169,7 @@ function updateOverallStatus(results) {
     // Update banner based on status
     banner.className = 'status-banner';
     
-    if (healthyCount === totalCount) {
+    if (healthyCount === 6) {
         banner.classList.add('success');
         icon.innerHTML = `
             <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -190,7 +199,7 @@ function updateOverallStatus(results) {
             </svg>
         `;
         title.textContent = '⚠️ Partial Service Disruption';
-        message.textContent = `${healthyCount} out of ${totalCount} services operational. Some services may be experiencing issues`;
+        message.textContent = `${healthyCount} out of 6 services operational. Some services may be experiencing issues`;
     }
 }
 
