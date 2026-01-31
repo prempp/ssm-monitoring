@@ -1,5 +1,6 @@
 // API Endpoints - Use proxy to avoid CORS issues
 const USE_PROXY = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+const IS_GITHUB_PAGES = window.location.hostname.includes('github.io');
 
 const endpoints = USE_PROXY ? {
     core: '/api/core',
@@ -168,6 +169,21 @@ function updateOverallStatus(results) {
     
     // Update banner based on status
     banner.className = 'status-banner';
+    
+    // Special message for GitHub Pages
+    if (IS_GITHUB_PAGES && healthyCount === 0) {
+        banner.classList.add('warning');
+        icon.innerHTML = `
+            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2"/>
+                <path d="M12 8V12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                <circle cx="12" cy="16" r="1" fill="currentColor"/>
+            </svg>
+        `;
+        title.textContent = 'ℹ️ Demo Mode - CORS Restrictions';
+        message.textContent = 'Services require authentication and CORS configuration. Run locally with "npm start" for full functionality, or explore the DB2 HADR, Cron Jobs, and SonarQube tabs with demo data.';
+        return;
+    }
     
     if (healthyCount === 6) {
         banner.classList.add('success');
