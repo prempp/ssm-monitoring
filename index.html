@@ -61,8 +61,23 @@
             </div>
         </div>
 
-        <!-- Service Cards -->
-        <div class="services-grid">
+        <!-- Tabs Navigation -->
+        <div class="tabs-container">
+            <div class="tabs-nav">
+                <button class="tab-btn active" data-tab="core-sanity">
+                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="width: 20px; height: 20px;">
+                        <path d="M12 2L2 7L12 12L22 7L12 2Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M2 17L12 22L22 17" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M2 12L12 17L22 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    CORE Sanity
+                </button>
+                <!-- Add more tabs here in the future -->
+            </div>
+
+            <!-- Tab Content -->
+            <div class="tab-content active" id="core-sanity">
+                <div class="services-grid">
             <!-- Core Service -->
             <div class="service-card" id="coreCard">
                 <div class="card-header">
@@ -277,6 +292,8 @@
                 <div class="card-body">
                     <div class="response-data" id="scwConsumerResponse">
                         <div class="skeleton-loader"></div>
+                            </div>
+                        </div>
                     </div>
                     <div class="card-footer">
                         <span class="response-time" id="scwConsumerTime">-- ms</span>
