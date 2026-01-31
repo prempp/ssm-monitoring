@@ -41,6 +41,21 @@
             </div>
         </header>
 
+        <!-- GitHub Pages Info Banner (shown only on GitHub Pages) -->
+        <div class="status-banner warning" id="githubPagesBanner" style="display: none;">
+            <div class="status-icon">
+                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2"/>
+                    <path d="M12 8V12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    <circle cx="12" cy="16" r="1" fill="currentColor"/>
+                </svg>
+            </div>
+            <div class="status-content">
+                <h2>ℹ️ Demo Mode - GitHub Pages</h2>
+                <p>SSM Core services require authentication. Explore the <strong>DB2 HADR</strong>, <strong>Cron Jobs</strong>, and <strong>SonarQube</strong> tabs for full demo functionality. Run locally with <code>npm start</code> for live SSM monitoring.</p>
+            </div>
+        </div>
+
         <!-- Overall Status Banner -->
         <div class="status-banner" id="statusBanner">
             <div class="status-icon" id="statusIcon">
@@ -60,6 +75,14 @@
                 <span class="progress-text" id="progressText">0/3</span>
             </div>
         </div>
+        
+        <script>
+            // Show GitHub Pages banner immediately if on GitHub Pages
+            if (window.location.hostname.includes('github.io')) {
+                document.getElementById('githubPagesBanner').style.display = 'flex';
+                document.getElementById('statusBanner').style.display = 'none';
+            }
+        </script>
 
         <!-- Tabs Navigation -->
         <div class="tabs-container">
