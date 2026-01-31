@@ -6,6 +6,12 @@ A comprehensive, modern monitoring dashboard combining SSM health checks, IBM Db
 ![Version](https://img.shields.io/badge/Version-3.0-blue?style=for-the-badge)
 ![License](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)
 
+## 🌐 Live Dashboard
+
+**Access the dashboard at:** [https://prempp.github.io/ssm-monitoring/](https://prempp.github.io/ssm-monitoring/)
+
+> The dashboard is hosted on GitHub Pages and updates automatically when changes are pushed to the main branch.
+
 ## ✨ Features
 
 ### 🎨 Modern UI/UX
