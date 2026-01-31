@@ -102,9 +102,18 @@ async function checkService(serviceName, url) {
         const endTime = performance.now();
         const responseTime = Math.round(endTime - startTime);
         
+        // More user-friendly error message for GitHub Pages
+        const errorMessage = IS_GITHUB_PAGES
+            ? 'Service requires authentication (Demo mode)'
+            : (error.message || 'Connection failed');
+        
         updateServiceUI(serviceName, {
             status: 'error',
-            data: { error: error.message || 'Connection failed' },
+            data: {
+                status: 'Demo Mode',
+                message: errorMessage,
+                note: IS_GITHUB_PAGES ? 'Run locally with npm start for live monitoring' : ''
+            },
             responseTime: responseTime
         });
         
