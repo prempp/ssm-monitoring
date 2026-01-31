@@ -80,6 +80,21 @@
                     </svg>
                     SSM Utilities
                 </button>
+                <button class="tab-btn" data-tab="db2-hadr">
+                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="width: 20px; height: 20px;">
+                        <path d="M4 7V17C4 18.1046 4.89543 19 6 19H18C19.1046 19 20 18.1046 20 17V7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M20 7H4L6 3H18L20 7Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M12 11V15" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    </svg>
+                    DB2 HADR
+                </button>
+                <button class="tab-btn" data-tab="cron-jobs">
+                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="width: 20px; height: 20px;">
+                        <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2"/>
+                        <path d="M12 6V12L16 14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    </svg>
+                    Cron Jobs
+                </button>
                 <button class="tab-btn" data-tab="sonar-cube">
                     <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="width: 20px; height: 20px;">
                         <path d="M9 11L12 14L22 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -331,6 +346,123 @@
                             </div>
                         </div>
             
+                        <!-- DB2 HADR Tab Content -->
+                        <div class="tab-content" id="db2-hadr">
+                            <div class="hadr-header">
+                                <h2>
+                                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="width: 24px; height: 24px;">
+                                        <path d="M4 7V17C4 18.1046 4.89543 19 6 19H18C19.1046 19 20 18.1046 20 17V7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                        <path d="M20 7H4L6 3H18L20 7Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                        <path d="M12 11V15" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                                    </svg>
+                                    IBM Db2 HADR Multi-Environment Monitoring
+                                </h2>
+                            </div>
+                            <div class="environments-grid" id="hadrEnvironmentsGrid">
+                                <div class="loading-container">
+                                    <i class="fas fa-spinner fa-spin"></i>
+                                    <p>Loading HADR environments...</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Cron Jobs Tab Content -->
+                        <div class="tab-content" id="cron-jobs">
+                            <div class="cron-header">
+                                <h2>
+                                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="width: 24px; height: 24px;">
+                                        <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2"/>
+                                        <path d="M12 6V12L16 14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                                    </svg>
+                                    Scheduled Cron Jobs Monitor
+                                </h2>
+                            </div>
+                            
+                            <!-- Stats Overview -->
+                            <div class="cron-stats" id="cronStats">
+                                <div class="stat-card">
+                                    <div class="stat-icon success">
+                                        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M20 6L9 17L4 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                        </svg>
+                                    </div>
+                                    <div class="stat-content">
+                                        <div class="stat-value" id="totalJobs">0</div>
+                                        <div class="stat-label">Total Jobs</div>
+                                    </div>
+                                </div>
+                                <div class="stat-card">
+                                    <div class="stat-icon running">
+                                        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2"/>
+                                            <path d="M12 6V12L16 14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                                        </svg>
+                                    </div>
+                                    <div class="stat-content">
+                                        <div class="stat-value" id="runningJobs">0</div>
+                                        <div class="stat-label">Running</div>
+                                    </div>
+                                </div>
+                                <div class="stat-card">
+                                    <div class="stat-icon success">
+                                        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M14 9V5C14 4.46957 13.7893 3.96086 13.4142 3.58579C13.0391 3.21071 12.5304 3 12 3H5C4.46957 3 3.96086 3.21071 3.58579 3.58579C3.21071 3.96086 3 4.46957 3 5V19C3 19.5304 3.21071 20.0391 3.58579 20.4142C3.96086 20.7893 4.46957 21 5 21H12C12.5304 21 13.0391 20.7893 13.4142 20.4142C13.7893 20.0391 14 19.5304 14 19V15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                            <path d="M7 9L10 12L21 3" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                        </svg>
+                                    </div>
+                                    <div class="stat-content">
+                                        <div class="stat-value" id="successJobs">0</div>
+                                        <div class="stat-label">Successful</div>
+                                    </div>
+                                </div>
+                                <div class="stat-card">
+                                    <div class="stat-icon failed">
+                                        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M10.29 3.86L1.82 18C1.64537 18.3024 1.55296 18.6453 1.55199 18.9945C1.55101 19.3437 1.64151 19.6871 1.81445 19.9905C1.98738 20.2939 2.23675 20.5467 2.53773 20.7239C2.83871 20.9011 3.18082 20.9962 3.53 21H20.47C20.8192 20.9962 21.1613 20.9011 21.4623 20.7239C21.7633 20.5467 22.0126 20.2939 22.1856 19.9905C22.3585 19.6871 22.449 19.3437 22.448 18.9945C22.447 18.6453 22.3546 18.3024 22.18 18L13.71 3.86C13.5317 3.56611 13.2807 3.32312 12.9812 3.15448C12.6817 2.98585 12.3437 2.89725 12 2.89725C11.6563 2.89725 11.3183 2.98585 11.0188 3.15448C10.7193 3.32312 10.4683 3.56611 10.29 3.86Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                            <path d="M12 9V13" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                                            <circle cx="12" cy="17" r="1" fill="currentColor"/>
+                                        </svg>
+                                    </div>
+                                    <div class="stat-content">
+                                        <div class="stat-value" id="failedJobs">0</div>
+                                        <div class="stat-label">Failed</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Environment Tabs for Cron Jobs -->
+                            <div class="env-tabs">
+                                <button class="env-tab active" data-env="test">
+                                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="width: 18px; height: 18px;">
+                                        <path d="M9.75 17L9 20L8 21H16L15 20L14.25 17M3 13H21M5 17H19C19.5304 17 20.0391 16.7893 20.4142 16.4142C20.7893 16.0391 21 15.5304 21 15V5C21 4.46957 20.7893 3.96086 20.4142 3.58579C20.0391 3.21071 19.5304 3 19 3H5C4.46957 3 3.96086 3.21071 3.58579 3.58579C3.21071 3.96086 3 4.46957 3 5V15C3 15.5304 3.21071 16.0391 3.58579 16.4142C3.96086 16.7893 4.46957 17 5 17Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                    <span>TEST</span>
+                                </button>
+                                <button class="env-tab" data-env="stage">
+                                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="width: 18px; height: 18px;">
+                                        <path d="M12 2L2 7L12 12L22 7L12 2Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                        <path d="M2 17L12 22L22 17" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                        <path d="M2 12L12 17L22 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                    <span>STAGE</span>
+                                </button>
+                                <button class="env-tab" data-env="prod">
+                                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="width: 18px; height: 18px;">
+                                        <path d="M13 2L3 14H12L11 22L21 10H12L13 2Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                    <span>PROD</span>
+                                </button>
+                            </div>
+
+                            <!-- Cron Jobs Grid -->
+                            <div class="cron-jobs-grid" id="cronJobsGrid">
+                                <div class="loading-container">
+                                    <i class="fas fa-spinner fa-spin"></i>
+                                    <p>Loading cron jobs...</p>
+                                </div>
+                            </div>
+                        </div>
+            
                         <!-- Sonar Cube Tab Content -->
                         <div class="tab-content" id="sonar-cube">
                             <div class="placeholder-content">
@@ -374,6 +506,9 @@
         </footer>
     </div>
 
+    <script src="hadr.js"></script>
+    <script src="cron-jobs.js"></script>
+    <script src="sonarqube.js"></script>
     <script src="script.js"></script>
 </body>
 </html>

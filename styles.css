@@ -769,4 +769,1011 @@ body::before {
     }
 }
 
+
+/* ========================================
+   DB2 HADR & Cron Jobs Styles
+   ======================================== */
+
+/* HADR Header */
+.hadr-header, .cron-header {
+    margin-bottom: 2rem;
+    padding: 1.5rem;
+    background: var(--bg-card);
+    border-radius: 16px;
+    border: 1px solid var(--border-color);
+    box-shadow: var(--shadow);
+}
+
+.hadr-header h2, .cron-header h2 {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    font-size: 1.5rem;
+    font-weight: 700;
+    background: linear-gradient(135deg, var(--accent-blue), var(--accent-cyan));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+/* Environment Cards Grid */
+.environments-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+    gap: 2rem;
+    margin-bottom: 2rem;
+}
+
+/* Environment Card */
+.env-card {
+    background: var(--bg-card);
+    border-radius: 20px;
+    border: 2px solid var(--border-color);
+    overflow: hidden;
+    transition: all 0.3s ease;
+    animation: fadeIn 0.6s ease-out both;
+    position: relative;
+}
+
+.env-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--accent-blue), var(--accent-cyan));
+    transition: height 0.3s ease;
+}
+
+.env-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-lg);
+    border-color: var(--accent-blue);
+}
+
+.env-card:hover::before {
+    height: 6px;
+}
+
+/* Environment-specific colors */
+.env-card.test::before {
+    background: linear-gradient(90deg, #0f62fe, #0043ce);
+}
+
+.env-card.stage::before {
+    background: linear-gradient(90deg, #f1c21b, #d4a500);
+}
+
+.env-card.prod::before {
+    background: linear-gradient(90deg, #24a148, #198038);
+}
+
+.env-card.dr::before {
+    background: linear-gradient(90deg, #da1e28, #a2191f);
+}
+
+/* Environment Card Header */
+.env-card-header {
+    padding: 1.5rem;
+    border-bottom: 1px solid var(--border-color);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.env-title {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.env-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    color: white;
+}
+
+.env-card.test .env-icon {
+    background: linear-gradient(135deg, #0f62fe, #0043ce);
+}
+
+.env-card.stage .env-icon {
+    background: linear-gradient(135deg, #f1c21b, #d4a500);
+}
+
+.env-card.prod .env-icon {
+    background: linear-gradient(135deg, #24a148, #198038);
+}
+
+.env-card.dr .env-icon {
+    background: linear-gradient(135deg, #da1e28, #a2191f);
+}
+
+.env-name {
+    font-size: 1.25rem;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.env-status {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-size: 0.875rem;
+    font-weight: 600;
+}
+
+.env-status.connected {
+    background: var(--success-bg);
+    color: var(--success);
+}
+
+.env-status.disconnected {
+    background: var(--error-bg);
+    color: var(--error);
+}
+
+.env-status.warning {
+    background: var(--warning-bg);
+    color: var(--warning);
+}
+
+.status-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    animation: pulseDot 2s ease-in-out infinite;
+}
+
+.env-status.connected .status-dot {
+    background: var(--success);
+}
+
+.env-status.disconnected .status-dot {
+    background: var(--error);
+}
+
+.env-status.warning .status-dot {
+    background: var(--warning);
+}
+
+/* Environment Card Body */
+.env-card-body {
+    padding: 1.5rem;
+}
+
+.hadr-section, .jobs-section, .metrics-section {
+    margin-bottom: 1.5rem;
+}
+
+.hadr-section:last-child, .jobs-section:last-child, .metrics-section:last-child {
+    margin-bottom: 0;
+}
+
+.section-title {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--text-secondary);
+    margin-bottom: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* HADR Status */
+.hadr-status {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+}
+
+.hadr-node {
+    background: var(--bg-secondary);
+    padding: 1rem;
+    border-radius: 12px;
+    border: 1px solid var(--border-color);
+}
+
+.node-label {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    margin-bottom: 0.5rem;
+    text-transform: uppercase;
+    font-weight: 600;
+}
+
+.node-state {
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+}
+
+.node-state.peer {
+    color: var(--success);
+}
+
+.node-state.disconnected {
+    color: var(--error);
+}
+
+.node-info {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    font-family: 'JetBrains Mono', monospace;
+}
+
+.sync-mode {
+    margin-top: 1rem;
+    padding: 0.75rem;
+    background: rgba(59, 130, 246, 0.1);
+    border-radius: 8px;
+    text-align: center;
+    font-weight: 600;
+    color: var(--accent-blue);
+}
+
+/* Cron Jobs Stats */
+.cron-stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.stat-card {
+    background: var(--bg-card);
+    border-radius: 16px;
+    padding: 1.5rem;
+    border: 1px solid var(--border-color);
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    transition: all 0.3s ease;
+}
+
+.stat-card:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow);
+}
+
+.stat-icon {
+    width: 56px;
+    height: 56px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.stat-icon svg {
+    width: 28px;
+    height: 28px;
+}
+
+.stat-icon.success {
+    background: var(--success-bg);
+    color: var(--success);
+}
+
+.stat-icon.running {
+    background: rgba(59, 130, 246, 0.1);
+    color: var(--accent-blue);
+}
+
+.stat-icon.failed {
+    background: var(--error-bg);
+    color: var(--error);
+}
+
+.stat-content {
+    flex: 1;
+}
+
+.stat-value {
+    font-size: 2rem;
+    font-weight: 800;
+    font-family: 'JetBrains Mono', monospace;
+    line-height: 1;
+    margin-bottom: 0.25rem;
+}
+
+.stat-label {
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+    font-weight: 500;
+}
+
+/* Environment Tabs */
+.env-tabs {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 2rem;
+    border-bottom: 2px solid var(--border-color);
+    padding-bottom: 0;
+}
+
+.env-tab {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 1rem 1.5rem;
+    background: transparent;
+    color: var(--text-secondary);
+    border: none;
+    border-bottom: 3px solid transparent;
+    font-weight: 600;
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-bottom: -2px;
+}
+
+.env-tab:hover {
+    color: var(--text-primary);
+    background: rgba(59, 130, 246, 0.05);
+}
+
+.env-tab.active {
+    color: var(--accent-blue);
+    border-bottom-color: var(--accent-blue);
+    background: rgba(59, 130, 246, 0.05);
+}
+
+.env-tab svg {
+    transition: transform 0.3s ease;
+}
+
+.env-tab:hover svg {
+    transform: scale(1.1);
+}
+
+/* Cron Jobs Grid */
+.cron-jobs-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    gap: 1.5rem;
+}
+
+.cron-job-card {
+    background: var(--bg-card);
+    border-radius: 16px;
+    padding: 1.5rem;
+    border: 1px solid var(--border-color);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.cron-job-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 4px;
+    height: 100%;
+    background: var(--success);
+    transition: width 0.3s ease;
+}
+
+.cron-job-card.failed::before {
+    background: var(--error);
+    animation: blink 1s ease-in-out infinite;
+}
+
+.cron-job-card.running::before {
+    background: var(--accent-blue);
+}
+
+.cron-job-card:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow);
+}
+
+@keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
+}
+
+.job-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 1rem;
+}
+
+.job-name {
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin-bottom: 0.25rem;
+}
+
+.job-type {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+}
+
+.job-status-badge {
+    padding: 0.4rem 0.8rem;
+    border-radius: 12px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.job-status-badge.success {
+    background: var(--success-bg);
+    color: var(--success);
+}
+
+.job-status-badge.failed {
+    background: var(--error-bg);
+    color: var(--error);
+}
+
+.job-status-badge.running {
+    background: rgba(59, 130, 246, 0.1);
+    color: var(--accent-blue);
+}
+
+.job-details {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.job-detail-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.875rem;
+}
+
+.job-detail-label {
+    color: var(--text-secondary);
+    font-weight: 500;
+}
+
+.job-detail-value {
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+/* Jobs List */
+.jobs-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.job-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.75rem;
+    background: var(--bg-secondary);
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+    transition: all 0.2s ease;
+}
+
+.job-item:hover {
+    background: var(--bg-card-hover);
+}
+
+.job-item.failed {
+    border-color: var(--error);
+    background: var(--error-bg);
+}
+
+.job-item-name {
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
+.job-item-status {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.8rem;
+}
+
+.job-item-status svg {
+    width: 16px;
+    height: 16px;
+}
+
+.job-item-status.success {
+    color: var(--success);
+}
+
+.job-item-status.failed {
+    color: var(--error);
+}
+
+.failed-badge {
+    background: var(--error);
+    color: white;
+    padding: 0.25rem 0.5rem;
+    border-radius: 12px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    animation: blink 1s ease-in-out infinite;
+}
+
+/* Metrics Section */
+.metrics-grid {
+
+/* ========================================
+   SonarQube Dashboard Styles
+   ======================================== */
+
+.sonar-dashboard {
+    animation: fadeIn 0.6s ease-out;
+}
+
+.sonar-header {
+    background: var(--bg-card);
+    border-radius: 20px;
+    padding: 2rem;
+    margin-bottom: 2rem;
+    border: 1px solid var(--border-color);
+    box-shadow: var(--shadow);
+}
+
+.sonar-title {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.sonar-title svg {
+    color: var(--accent-blue);
+}
+
+.sonar-title h2 {
+    font-size: 2rem;
+    font-weight: 800;
+    background: linear-gradient(135deg, var(--accent-blue), var(--accent-cyan));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 0.5rem;
+}
+
+.sonar-subtitle {
+    font-size: 1.1rem;
+    color: var(--text-secondary);
+    font-weight: 500;
+}
+
+/* SonarQube Stats Grid */
+.sonar-stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.sonar-stat-card {
+    background: var(--bg-card);
+    border-radius: 16px;
+    padding: 1.5rem;
+    border: 2px solid var(--border-color);
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    transition: all 0.3s ease;
+}
+
+.sonar-stat-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-lg);
+}
+
+.sonar-stat-card.blocker {
+    border-color: #da1e28;
+}
+
+.sonar-stat-card.blocker .stat-icon {
+    background: rgba(218, 30, 40, 0.1);
+    color: #da1e28;
+}
+
+.sonar-stat-card.critical {
+    border-color: #f1c21b;
+}
+
+.sonar-stat-card.critical .stat-icon {
+    background: rgba(241, 194, 27, 0.1);
+    color: #f1c21b;
+}
+
+.sonar-stat-card.major {
+    border-color: var(--warning);
+}
+
+.sonar-stat-card.major .stat-icon {
+    background: var(--warning-bg);
+    color: var(--warning);
+}
+
+.sonar-stat-card.security {
+    border-color: var(--accent-blue);
+}
+
+.sonar-stat-card.security .stat-icon {
+    background: rgba(59, 130, 246, 0.1);
+    color: var(--accent-blue);
+}
+
+/* SonarQube Features Grid */
+.sonar-features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 2rem;
+    margin-bottom: 2rem;
+}
+
+.sonar-feature-card {
+    background: var(--bg-card);
+    border-radius: 20px;
+    padding: 2rem;
+    border: 1px solid var(--border-color);
+    transition: all 0.3s ease;
+}
+
+.sonar-feature-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-lg);
+    border-color: var(--accent-blue);
+}
+
+.feature-icon {
+    width: 64px;
+    height: 64px;
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1.5rem;
+}
+
+.feature-icon svg {
+    width: 32px;
+    height: 32px;
+}
+
+.feature-icon.security {
+    background: linear-gradient(135deg, #da1e28, #a2191f);
+    color: white;
+}
+
+.feature-icon.automation {
+    background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
+    color: white;
+}
+
+.feature-icon.compliance {
+    background: linear-gradient(135deg, var(--success), #198038);
+    color: white;
+}
+
+.sonar-feature-card h3 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    color: var(--text-primary);
+}
+
+.feature-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.feature-list li {
+    padding: 0.5rem 0;
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+/* Quick Start Section */
+.sonar-quick-start {
+    background: var(--bg-card);
+    border-radius: 20px;
+    padding: 2rem;
+    margin-bottom: 2rem;
+    border: 1px solid var(--border-color);
+}
+
+.sonar-quick-start h3 {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+    color: var(--text-primary);
+}
+
+.sonar-quick-start h3 svg {
+    color: var(--accent-blue);
+}
+
+.quick-start-steps {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+}
+
+.step-card {
+    background: var(--bg-secondary);
+    border-radius: 12px;
+    padding: 1.5rem;
+    border: 1px solid var(--border-color);
+    display: flex;
+    gap: 1rem;
+    transition: all 0.3s ease;
+}
+
+.step-card:hover {
+    background: var(--bg-card-hover);
+    transform: translateY(-3px);
+}
+
+.step-number {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 800;
+    font-size: 1.25rem;
+    flex-shrink: 0;
+}
+
+.step-content {
+    flex: 1;
+}
+
+.step-content h4 {
+    font-size: 1rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    color: var(--text-primary);
+}
+
+.step-content code {
+    display: block;
+    background: var(--bg-card);
+    padding: 0.5rem;
+    border-radius: 6px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.85rem;
+    color: var(--accent-blue);
+    border: 1px solid var(--border-color);
+}
+
+/* Documentation Links */
+.sonar-docs {
+    background: var(--bg-card);
+    border-radius: 20px;
+    padding: 2rem;
+    margin-bottom: 2rem;
+    border: 1px solid var(--border-color);
+}
+
+.sonar-docs h3 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+    color: var(--text-primary);
+}
+
+.docs-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1rem;
+}
+
+.doc-link {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem 1.5rem;
+    background: var(--bg-secondary);
+    border-radius: 12px;
+    border: 1px solid var(--border-color);
+    color: var(--text-primary);
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.doc-link:hover {
+    background: var(--accent-blue);
+    color: white;
+    transform: translateX(5px);
+    box-shadow: var(--shadow);
+}
+
+.doc-link svg {
+    width: 24px;
+    height: 24px;
+    flex-shrink: 0;
+}
+
+/* Configuration Note */
+.sonar-note {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    padding: 1.5rem;
+    background: rgba(59, 130, 246, 0.1);
+    border-radius: 12px;
+    border: 1px solid var(--accent-blue);
+    color: var(--text-primary);
+}
+
+.sonar-note svg {
+    color: var(--accent-blue);
+    flex-shrink: 0;
+    margin-top: 0.25rem;
+}
+
+.sonar-note code {
+    background: var(--bg-card);
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.9rem;
+    color: var(--accent-blue);
+}
+
+/* Responsive Design for SonarQube */
+@media (max-width: 768px) {
+    .sonar-stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .sonar-features-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .quick-start-steps {
+        grid-template-columns: 1fr;
+    }
+    
+    .docs-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 480px) {
+    .sonar-stats-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .sonar-title {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .sonar-title h2 {
+        font-size: 1.5rem;
+    }
+}
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 1rem;
+}
+
+.metric-item {
+    background: var(--bg-secondary);
+    padding: 1rem;
+    border-radius: 12px;
+    border: 1px solid var(--border-color);
+    text-align: center;
+}
+
+.metric-value {
+    font-size: 1.5rem;
+    font-weight: 800;
+    font-family: 'JetBrains Mono', monospace;
+    color: var(--accent-blue);
+    margin-bottom: 0.25rem;
+}
+
+.metric-label {
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+    font-weight: 500;
+}
+
+/* Loading Container */
+.loading-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 4rem 2rem;
+    text-align: center;
+}
+
+.loading-container i {
+    font-size: 3rem;
+    color: var(--accent-blue);
+    margin-bottom: 1rem;
+}
+
+.loading-container p {
+    font-size: 1.1rem;
+    color: var(--text-secondary);
+}
+
+/* Responsive Design for New Features */
+@media (max-width: 768px) {
+    .environments-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .hadr-status {
+        grid-template-columns: 1fr;
+    }
+    
+    .cron-stats {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .env-tabs {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+    
+    .env-tab {
+        white-space: nowrap;
+    }
+    
+    .cron-jobs-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 480px) {
+    .cron-stats {
+        grid-template-columns: 1fr;
+    }
+    
+    .stat-card {
+        padding: 1rem;
+    }
+    
+    .stat-icon {
+        width: 48px;
+        height: 48px;
+    }
+    
+    .stat-value {
+        font-size: 1.5rem;
+    }
+}
 /* Made with Bob */

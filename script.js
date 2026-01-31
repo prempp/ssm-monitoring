@@ -241,6 +241,11 @@ window.addEventListener('unhandledrejection', (event) => {
 
 // Made with Bob
 
+// Initialize module instances
+let hadrMonitor = null;
+let cronJobsMonitor = null;
+let sonarQubeMonitor = null;
+
 // Tab switching functionality
 document.addEventListener('DOMContentLoaded', () => {
     const tabButtons = document.querySelectorAll('.tab-btn');
@@ -257,6 +262,56 @@ document.addEventListener('DOMContentLoaded', () => {
             // Add active class to clicked button and corresponding content
             button.classList.add('active');
             document.getElementById(tabId).classList.add('active');
+            
+            // Initialize modules when their tabs are activated
+            handleTabActivation(tabId);
         });
     });
+});
+
+/**
+ * Handle tab activation and initialize corresponding modules
+ */
+function handleTabActivation(tabId) {
+    switch(tabId) {
+        case 'db2-hadr':
+            if (!hadrMonitor) {
+                hadrMonitor = new HADRMonitor();
+                hadrMonitor.init();
+            }
+            break;
+        case 'cron-jobs':
+            if (!cronJobsMonitor) {
+                cronJobsMonitor = new CronJobsMonitor();
+                cronJobsMonitor.init();
+            }
+            break;
+        case 'sonar-cube':
+            if (!sonarQubeMonitor) {
+                sonarQubeMonitor = new SonarQubeMonitor();
+                sonarQubeMonitor.init();
+            }
+            break;
+        case 'core-sanity':
+            // Core sanity is already initialized on page load
+            break;
+        default:
+            // Other tabs don't need special initialization
+            break;
+    }
+}
+
+/**
+ * Cleanup modules when page is unloaded
+ */
+window.addEventListener('beforeunload', () => {
+    if (hadrMonitor) {
+        hadrMonitor.destroy();
+    }
+    if (cronJobsMonitor) {
+        cronJobsMonitor.destroy();
+    }
+    if (sonarQubeMonitor) {
+        sonarQubeMonitor.destroy();
+    }
 });
